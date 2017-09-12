@@ -1,4 +1,5 @@
 .DS_Store
 .env
+.serverless/
 node_modules/
 yarn.lock
