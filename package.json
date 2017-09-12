@@ -1,0 +1,11 @@
+{
+  "name": "stripe-serverless",
+  "version": "1.0.0",
+  "description": "A lambda function to deal with stripe",
+  "author": "Guillaume BOUDON <guillaumeboudon@gmail.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "stripe": "^5.0.0"
+  }
+}

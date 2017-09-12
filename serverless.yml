@@ -1,0 +1,9 @@
+service: stripe-serverless
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+
+functions:
+  stripePayment:
+    handler: handler.stripePayment
