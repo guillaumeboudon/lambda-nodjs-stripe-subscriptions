@@ -3,7 +3,12 @@ service: stripe-serverless
 provider:
   name: aws
   runtime: nodejs6.10
+  region: eu-west-2
+  profile: serverless-demo
+
 
 functions:
   stripePayment:
     handler: handler.stripePayment
+    events:
+        - http: POST stripePayment
