@@ -2,17 +2,21 @@
 
 require('dotenv').config()
 
-module.exports.stripePayment = (jsonData, context, callback) => {
+module.exports.stripePayment = (event, context, callback) => {
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
+  const url = require('url')
+
+  const jsonData = new url.URLSearchParams(event.body);
+
   stripe.customers.create({
-    email: jsonData.stripeEmail,
-    source: jsonData.stripeToken
+    email: jsonData.get('stripeEmail'),
+    source: jsonData.get('stripeToken')
   }).then(function(customer){
     stripe.subscriptions.create({
       customer: customer.id,
       items: [{
-        plan: jsonData.plan
+        plan: jsonData.get('plan')
       }]
     })
   })
