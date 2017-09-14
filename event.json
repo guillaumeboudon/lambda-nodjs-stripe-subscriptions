@@ -1,1 +1,1 @@
-{"body": "stripeEmail=test@toto.com&stripeToken=tok_visa&plan=mensual-parisrb"}
+{"body": "{\"stripeEmail\": \"test@toto.com\", \"stripeToken\": \"tok_visa\", \"plan\": \"mensual-parisrb\"}"}
