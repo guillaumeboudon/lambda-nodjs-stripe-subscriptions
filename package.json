@@ -6,7 +6,6 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "stripe": "^5.0.0",
-    "query-string": "^5.0.0"
+    "stripe": "^5.0.0"
   }
 }

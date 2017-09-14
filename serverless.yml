@@ -11,4 +11,7 @@ functions:
   stripePayment:
     handler: handler.stripePayment
     events:
-        - http: POST stripePayment
+        - http:
+            path: stripePayment
+            method: post
+            cors: true
