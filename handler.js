@@ -1,6 +1,13 @@
 'use strict';
 
-var returner = function(callback, stripeErrors) {
+try {
+  var dotenv = require('dotenv');
+  dotenv.config()
+} catch (err){
+  console.log("Dotenv is not installed.");
+}
+
+const returner = function(callback, stripeErrors) {
   const response = {
     statusCode: 200,
     headers: {
@@ -17,12 +24,12 @@ module.exports.stripePayment = (event, context, callback) => {
 
   const body = JSON.parse(event.body);
 
+  const returnerCallback = (m) =>
+    returner(callback, m)
+
   stripe.customers.create({
-    email: body.stripeEmail
-  }).then(function(customer){
-    return stripe.customers.createSource(customer.id, {
-      source: "toto"/*body.stripeToken*/
-    });
+    email: body.stripeEmail,
+    source: body.stripeToken
   }).then(function(customer) {
     return stripe.subscriptions.create({
       customer: customer.id,
@@ -30,9 +37,9 @@ module.exports.stripePayment = (event, context, callback) => {
         plan: body.stripePlanId
       }]
     });
+  }).then(function (subscription) {
+    returnerCallback("Ok");
   }).catch(function(err) {
-    return err
+    returnerCallback(err);
   });
-
-  return returner(callback, "");
 };
