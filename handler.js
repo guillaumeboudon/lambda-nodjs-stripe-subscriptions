@@ -1,11 +1,6 @@
 'use strict';
 
-try {
-  var dotenv = require('dotenv');
-  dotenv.config()
-} catch (err){
-  console.log("Dotenv is not installed.");
-}
+require('dotenv').config();
 
 const returner = function(callback, stripeErrors) {
   const response = {
@@ -17,7 +12,7 @@ const returner = function(callback, stripeErrors) {
     body: JSON.stringify({ "message": stripeErrors })
   };
   return callback(null, response);
-}
+};
 
 module.exports.stripePayment = (event, context, callback) => {
   const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -25,7 +20,7 @@ module.exports.stripePayment = (event, context, callback) => {
   const body = JSON.parse(event.body);
 
   const returnerCallback = (m) =>
-    returner(callback, m)
+    returner(callback, m);
 
   stripe.customers.create({
     email: body.stripeEmail,
